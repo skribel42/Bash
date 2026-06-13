@@ -1,4 +1,4 @@
-# Bash
+#BASH
 # install-pentest-tools
 
 A single Bash script that turns a stock **Debian 13 (trixie)** box into a usable
@@ -34,14 +34,14 @@ fingerprint before trusting it, and has a `--dry-run` mode that changes nothing.
 **1. Get the script.** Either clone the repo:
 
 ```bash
-git clone https://github.com/<your-username>/install-pentest-tools.git
+git clone https://github.com/skribel42/install-pentest-tools.git
 cd install-pentest-tools
 ```
 
 ...or just grab the one file:
 
 ```bash
-wget https://raw.githubusercontent.com/<your-username>/install-pentest-tools/main/install-pentest-tools.sh
+wget https://raw.githubusercontent.com/skribel42/install-pentest-tools/main/install-pentest-tools.sh
 ```
 
 **2. Make it executable.** This tells Linux the file is allowed to run:
@@ -97,7 +97,48 @@ sudo wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/ka
 sudo apt update
 ```
 
-## Disclaimer
+## Keeping the tools updated
+
+How you update depends on where a tool came from.
+
+**The default (Debian-native) tools** are now just regular system packages, so
+they update with everything else:
+
+```bash
+sudo apt update && sudo apt upgrade
+```
+
+Run that whenever you'd normally update Debian. Nothing special to remember.
+
+**The exploit database** (`searchsploit`) ships exploit content that updates
+separately from its package. Refresh it with:
+
+```bash
+searchsploit -u
+```
+
+**Metasploit** (if you installed it) updates either through apt — Rapid7's
+installer adds its own repo, so the normal `apt upgrade` above catches it — or
+directly with:
+
+```bash
+sudo msfupdate
+```
+
+**Kali-repo packages** (only if you used `--with-kali-repo`) are the one catch.
+Because the script pins Kali at low priority to protect your Debian base, a
+plain `apt upgrade` will **not** pull newer Kali versions — those tools stay at
+the version you installed. That's the safety tradeoff working as intended. When
+you do want to update a specific Kali tool, target it explicitly:
+
+```bash
+sudo apt install <toolname>/kali-rolling
+```
+
+Don't remove the pin and run a blanket upgrade across the Kali repo — that's
+exactly the rolling-into-stable breakage the pin exists to prevent.
+
+
 
 These are security testing tools. Only use them against systems you own or have
 explicit written permission to test. You're responsible for what you do with them.
