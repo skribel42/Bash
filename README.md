@@ -1,4 +1,3 @@
-#BASH
 # install-pentest-tools
 
 A single Bash script that turns a stock **Debian 13 (trixie)** box into a usable
@@ -34,14 +33,14 @@ fingerprint before trusting it, and has a `--dry-run` mode that changes nothing.
 **1. Get the script.** Either clone the repo:
 
 ```bash
-git clone https://github.com/skribel42/install-pentest-tools.git
-cd install-pentest-tools
+git clone https://github.com/skribel41/Bash.git
+cd Bash
 ```
 
 ...or just grab the one file:
 
 ```bash
-wget https://raw.githubusercontent.com/skribel42/install-pentest-tools/main/install-pentest-tools.sh
+wget https://raw.githubusercontent.com/skribel41/Bash/main/install-pentest-tools.sh
 ```
 
 **2. Make it executable.** This tells Linux the file is allowed to run:
